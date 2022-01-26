@@ -1649,6 +1649,10 @@ public class PdfWriter extends DocWriter implements
 
     /** @see com.lowagie.text.pdf.interfaces.PdfAnnotations#addAnnotation(com.lowagie.text.pdf.PdfAnnotation) */
     public void addAnnotation(PdfAnnotation annot) {
+        int pdfx = this.getPDFXConformance();
+        if (pdfx == PdfWriter.PDFA1A || pdfx == PdfWriter.PDFA1B) {
+            annot.setFlags(PdfAnnotation.FLAGS_PRINT);
+        }
         pdf.addAnnotation(annot);
     }
 
