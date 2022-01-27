@@ -12,6 +12,34 @@ cd src
 ant jar
 ```
 
+# Releasing
+
+Run (Note: the duplicate `v2.1.7.version` is not a typo)
+
+```
+git tag -m v2.1.7.<version> v2.1.7.<version>
+git push --tags
+```
+
+In your ivy repo in `com.j5int/com.lowagie.itext/2.1.7.<version>` create a file
+called `ivy-2.1.7.<version>.xml` with content
+
+```
+<ivy-module version="2.0">
+  <info organisation="com.j5int" module="com.lowagie.text" revision="2.1.7.<version>" publication="<date>"/>
+  <publications>
+    <artifact name="com.lowagie.text" type="jar" ext="jar"/>
+  </publications>
+  <dependencies/>
+</ivy-module>
+```
+
+where `<date>` looks something like `20210127010000`. Copy `lib/iText.jar` into
+the same folder and rename it to `com.lowagie.itext-2.1.7.<version>.jar`.
+
+You should also create a GitHub release and upload `ivy-2.1.7.<version>.xml`
+and `com.lowagie.itext-2.1.7.<version>.jar` as artifacts.
+
 # License
 
  Copyright 1999, 2000, 2001, 2002 Bruno Lowagie
